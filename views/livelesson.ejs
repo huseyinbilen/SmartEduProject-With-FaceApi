@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/js/face-api.js"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css"> -->
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-md-9 board">
+
+    </div>
+    <div class="col-md-3 student-cam">
+      <div class="progress" id="loader">
+        <div class="indeterminate"></div>
+      </div>
+      <div class="margin">
+        <video onplay="onPlay(this)" id="inputVideo" autoplay muted></video>
+        <canvas id="overlay" />
+      </div>
+      <form id="EventConfirmRedirection" class="<%= records._id %>" name="EventConfirmRedirection" method="POST" action="/courses/ratio-update/<%= records._id %>">
+        <button class="btn btn-danger" onclick="stopVideo()">
+          <span>STOP</span>
+        </button>
+        <input id="data" type="hidden" value="<%= list %>" style="display: none;">
+        <input id="person" type="hidden" value="<%= person %>" style="display: none;">
+        <input id="ratio" name="ratio" type="hidden" value="null">
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript" src="/js/index.js"></script>
+  <script src="/js/commons.js"></script>
+
+</body>
+
+</html>
