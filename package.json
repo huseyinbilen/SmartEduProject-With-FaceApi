@@ -27,7 +27,8 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.13.8",
     "nodemailer": "^6.7.2",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "socket.io": "^4.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

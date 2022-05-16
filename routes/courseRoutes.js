@@ -13,9 +13,11 @@ router.route('/:slug').put(courseController.updateCourse);
 router.route('/enroll').post(courseController.enrollCourse);
 router.route('/release').post(courseController.releaseCourse);
 router.route('/join').post(courseController.joinLesson);
-router.route('/live/:slug').get(authMiddleware, courseController.getLiveLesson);
+// router.route('/live/:slug').get(authMiddleware, courseController.getLiveLesson);
+router.route('/live/:slug').get(authMiddleware, courseController.getRoom);
 router.route('/live/:slug').put(authMiddleware, courseController.startLesson);
 router.route('/live/stop/:slug').put(courseController.stopLesson);
 router.route('/ratio-update/:slug').post(courseController.ratioUpdate);
+// router.route('/test/socket').get(courseController.getRoom);
 
 module.exports = router;

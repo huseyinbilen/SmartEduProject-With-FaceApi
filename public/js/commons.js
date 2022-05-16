@@ -1,12 +1,14 @@
 // const classes = ['amy', 'bernadette', 'howard', 'leonard', 'penny', 'raj', 'sheldon', 'stuart', 'huseyin']
 const classes = document.getElementById('data').value.split(',');
+// const classes = ['625db69dcda132244442f23d'];
+// console.log(classes2);
 
 function getImageUri(imageName) {
-  return `/images/students/${imageName}`
+  return `/public/images/students/${imageName}`
 }
 
 function getFaceImageUri(className, idx) {
-  return `/images/students/${className}/${className}-image${idx}.png`
+  return `/public/images/students/${className}/${className}-image${idx}.png`
 }
 
 async function fetchImage(uri) {

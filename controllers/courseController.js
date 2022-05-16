@@ -193,7 +193,9 @@ exports.startLesson = async (req, res) => {
     });
     course.lastLesson = records._id;
     course.save();
-    res.status(200).redirect('/users/dashboard');
+    // res.status(200).redirect('/users/dashboard');
+    // res.status(201).redirect(`/courses/test/socket/?create/${records._id}`);
+    res.status(201).redirect(`/courses/live/${records._id}/?create/${records._id}`);
   } catch (error) {
     res.status(400).json({
       status: 'fail',
@@ -210,9 +212,9 @@ exports.stopLesson = async (req, res) => {
     const records = await Records.findById(req.body.lastLesson);
     records.finishedAt = Date.now();
     const timeDiff = parseInt((records.finishedAt.getTime() - records.createdAt.getTime()) /1000);
-    console.log(timeDiff); 
+    // console.log(timeDiff); 
     records.students.forEach((element, index) => {
-      console.log(parseInt((Number(records.students[index].count)/timeDiff)*100));
+      // console.log(parseInt((Number(records.students[index].count)/timeDiff)*100));
       records.students[index].ratio = parseInt((Number(records.students[index].count)/timeDiff)*100);
     });
     records.markModified('students');
@@ -256,7 +258,9 @@ exports.joinLesson = async (req, res) => {
       await records.save();
     }
 
-    res.status(201).redirect(`/courses/live/${req.body.lastLesson}`);
+    // res.status(201).redirect(`/courses/live/${req.body.lastLesson}`);
+    // res.status(201).redirect(`/courses/test/socket/?room=${req.body.lastLesson}`);
+    res.status(201).redirect(`/courses/live/${req.body.lastLesson}/?room=${req.body.lastLesson}`);
   } catch (error) {
     res.status(400).json({
       status: 'fail',
@@ -309,6 +313,32 @@ exports.ratioUpdate = async (req, res) => {
     // console.log(req.body);
     // console.log(req.body.ratio);
     // res.send('testttt');
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+  }
+};
+
+exports.getRoom = async (req, res) => {
+  try {
+    // const records = req.params.slug;
+    // console.log(records);
+    const records = await Records.findById(req.params.slug);
+    const person = req.session.userID;
+    if (records.finishedAt == null) {
+      let foldersName = fs.readdirSync(
+        __dirname + '/../public/images/students'
+      );
+      res.render('room', {
+        list: foldersName,
+        records,
+        person
+      });
+    } else {
+      res.send('Lesson Finished');
+    }
   } catch (error) {
     res.status(400).json({
       status: 'fail',

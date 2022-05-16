@@ -8,6 +8,7 @@ let forwardTimes = []
 let lessonTimer = 0;
 
 const person = document.getElementById('person').value;
+// const person = '625db69dcda132244442f23d';
 
 function onIncreaseMinFaceSize() {
   minFaceSize = Math.min(faceapi.round(minFaceSize + 50), 300)
